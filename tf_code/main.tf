@@ -140,25 +140,25 @@ resource "azurerm_firewall" "eus-firewall" {
 
 #Create spoke networks 
 
-resource "random_string" "prefix" {
-  length = 4
-  special = false
-  upper = false
-}
+# resource "random_string" "prefix" {
+#   length = 4
+#   special = false
+#   upper = false
+# }
 
-resource "random_pet" "wus2-virtual_network_name" {
-  prefix = "vnet-wus2-${random_string.prefix.result}"
-}
+# resource "random_pet" "wus2-virtual_network_name" {
+#   prefix = "vnet-wus2-${random_string.prefix.result}"
+# }
 
-resource "random_pet" "eus-virtual_network_name" {
-  prefix = "vnet-eus-${random_string.prefix.result}"
-}
+# resource "random_pet" "eus-virtual_network_name" {
+#   prefix = "vnet-eus-${random_string.prefix.result}"
+# }
 
 
 resource "azurerm_virtual_network" "wus2-vnet" {
   count = 2
 
-  name                = "${random_pet.wus2-virtual_network_name.id}-0${count.index}"
+  name                = "vnet-wus2-0${count.index}"
   resource_group_name = azurerm_resource_group.rgwus2.name
   location            = azurerm_resource_group.rgwus2.location
   address_space       = ["10.1.1${count.index}.0/24"]
@@ -175,7 +175,7 @@ resource "azurerm_subnet" "spokewus2" {
 resource "azurerm_virtual_network" "eus-vnet" {
   count = 2
 
-  name                = "${random_pet.eus-virtual_network_name.id}-0${count.index}"
+  name                = "vnet-eus-0${count.index}"
   resource_group_name = azurerm_resource_group.rgeus.name
   location            = azurerm_resource_group.rgeus.location
   address_space       = ["10.0.1${count.index}.0/24"]
