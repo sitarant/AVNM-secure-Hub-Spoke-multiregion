@@ -10,7 +10,7 @@ resource "azurerm_network_manager" "network_manager_instance" {
   name                = "network-manager"
   location            = azurerm_resource_group.network_manager_rg.location
   resource_group_name = azurerm_resource_group.network_manager_rg.name
-  scope_accesses      = ["Connectivity"]
+  scope_accesses      = ["Connectivity" , "SecurityAdmin"]
   description         = "example network manager"
   scope {
     subscription_ids = [data.azurerm_subscription.current.id]
