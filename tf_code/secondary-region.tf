@@ -102,6 +102,7 @@ resource "azurerm_public_ip" "secondary-vpn-gateway-pip" {
   resource_group_name = azurerm_resource_group.region2.name
   sku = "Standard"
   allocation_method = "Static"
+  zones = [1,2,3]
 }
 
 resource "azurerm_virtual_network_gateway" "secondary-vpn-gateway" {

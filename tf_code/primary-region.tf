@@ -107,6 +107,7 @@ resource "azurerm_public_ip" "primary-vpn-gateway-pip" {
   sku = "Standard"
 
   allocation_method = "Static"
+  zones = [1,2,3]
 }
 
 resource "azurerm_virtual_network_gateway" "primary-vpn-gateway" {
