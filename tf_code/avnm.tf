@@ -56,7 +56,7 @@ resource "azurerm_network_manager_connectivity_configuration" "primary-hub-spoke
   }
 
   hub {
-    resource_id   = azurerm_virtual_network.primary-region-hub-vnet.id
+    resource_id   = azurerm_virtual_network.primary-region.id
     resource_type = "Microsoft.Network/virtualNetworks"
   }
 }
@@ -71,7 +71,7 @@ resource "azurerm_network_manager_connectivity_configuration" "secondary-hub-spo
   }
 
   hub {
-    resource_id   = azurerm_virtual_network.secondary-region-hub-vnet.id
+    resource_id   = azurerm_virtual_network.secondary-region.id
     resource_type = "Microsoft.Network/virtualNetworks"
   }
 }
