@@ -1,13 +1,13 @@
 variable "primary-region" {
   type        = string
   description = "First region where resources will be deployed"
-  default = "swe-central"
+  default = "swedencentral"
 }
 
 variable "secondary-region" {
   type        = string
   description = "Secondary region where resources will be deployed"
-  default = "ger-west-central"
+  default = "norwayeast"
 }
 
 
@@ -32,6 +32,7 @@ variable "vm-user" {
 variable "vm-password" {
     description = "Password for all VMs in the lab"
     type = string
+    sensitive   = true
 }
 
 variable "vm-size" {

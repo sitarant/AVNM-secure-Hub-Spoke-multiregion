@@ -14,7 +14,7 @@ resource "azurerm_virtual_network_peering" "hub2hub" {
 
 resource "azurerm_virtual_network_peering" "hub2hub2" {
   name                         = "hub2hub2"
-  resource_group_name          = azurerm_resource_group.region2
+  resource_group_name          = azurerm_resource_group.region2.name
   virtual_network_name         = azurerm_virtual_network.secondary-region.name
   remote_virtual_network_id    = azurerm_virtual_network.primary-region.id
   allow_virtual_network_access = true

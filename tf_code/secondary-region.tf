@@ -8,7 +8,7 @@ resource "azurerm_virtual_network" "secondary-region" {
 
 }
 
-resource "azurerm_subnet" "prinary-region-hub-default" {
+resource "azurerm_subnet" "secondary-region-hub-default" {
   name                 = "vm-subnet"
   virtual_network_name = azurerm_virtual_network.secondary-region.name
   resource_group_name  = azurerm_resource_group.region2.name
