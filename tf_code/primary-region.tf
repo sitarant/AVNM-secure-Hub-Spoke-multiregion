@@ -104,8 +104,9 @@ resource "azurerm_public_ip" "primary-vpn-gateway-pip" {
   name                = "primary-vpn-gateway-pip"
   location            = azurerm_resource_group.region1.location
   resource_group_name = azurerm_resource_group.region1.name
+  sku = "Standard"
 
-  allocation_method = "Dynamic"
+  allocation_method = "Static"
 }
 
 resource "azurerm_virtual_network_gateway" "primary-vpn-gateway" {
@@ -123,7 +124,6 @@ resource "azurerm_virtual_network_gateway" "primary-vpn-gateway" {
   ip_configuration {
     name                          = "vnetGatewayConfig"
     public_ip_address_id          = azurerm_public_ip.primary-vpn-gateway-pip.id
-    private_ip_address_allocation = "Dynamic"
     subnet_id                     = azurerm_subnet.primary-region-hub-gateway.id
   }
 }
