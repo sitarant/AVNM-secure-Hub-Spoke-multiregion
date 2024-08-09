@@ -1,4 +1,4 @@
-#create hub networks and subnets in primary regipon
+# Create hub networks and subnets in primary region
 
 resource "azurerm_virtual_network" "primary-region" {
   name                = "primary-region-vnet"
@@ -33,7 +33,7 @@ resource "azurerm_subnet" "primary-region-hub-gateway" {
 }
 
 resource "azurerm_subnet" "primary-region-hub-bastion" {
-  name                 = "AzureBasionSubnet"
+  name                 = "AzureBastionSubnet"
   virtual_network_name = azurerm_virtual_network.primary-region.name
   resource_group_name  = azurerm_resource_group.region1.name
   address_prefixes     = ["10.1.3.0/24"]
@@ -41,7 +41,7 @@ resource "azurerm_subnet" "primary-region-hub-bastion" {
 }
 
 
-#Firewall deployment
+# Firewall deployment
 
 resource "azurerm_public_ip" "primary-firewall-pip" {
   name                = "primary-fw-pip"
@@ -67,7 +67,7 @@ resource "azurerm_firewall" "primary-firewall" {
   }
 }
 
-#Create Spokes
+# Create Spokes
 
 resource "azurerm_virtual_network" "primary-spokes-vnet" {
   count = 2
@@ -97,7 +97,7 @@ resource "azurerm_subnet" "spoke-primary-subnet-vm2" {
   
 }
 
-#vpn gateway deployment
+# VPN Gateway deployment
 
 
 resource "azurerm_public_ip" "primary-vpn-gateway-pip" {
@@ -129,11 +129,11 @@ resource "azurerm_virtual_network_gateway" "primary-vpn-gateway" {
   }
 }
 
-#VM deployment
+# VM deployment
 
 
-# Primary Hub VM
-##############################
+## Primary Hub VM
+
 resource "azurerm_network_interface" "primary-hub-vm-nic" {
   name                = "${var.primary-region}-hub-vm-nic"
   location            = azurerm_resource_group.region1.location
@@ -172,9 +172,9 @@ resource "azurerm_linux_virtual_machine" "primary-hub-vm" {
 }
 
 
-##############################
-# Primary Spoke1 VM1
-##############################
+
+## Primary Spoke1 VM1
+
 resource "azurerm_network_interface" "primary-spoke1-vm1-nic" {
   name                = "${var.primary-region}-spoke1-vm1-nic"
   location            = azurerm_resource_group.region1.location
@@ -212,9 +212,8 @@ resource "azurerm_linux_virtual_machine" "primary-spoke1-vm1" {
   }
 }
 
-##############################
-# Primary Spoke1 VM2
-##############################
+## Primary Spoke1 VM2
+
 resource "azurerm_network_interface" "primary-spoke1-vm2-nic" {
   name                = "${var.primary-region}-spoke1-vm2-nic"
   location            = azurerm_resource_group.region1.location
@@ -257,9 +256,9 @@ resource "azurerm_linux_virtual_machine" "primary-spoke1-vm2" {
 
 
 
-##############################
-# Primary Spoke2 VM1
-##############################
+
+## Primary Spoke2 VM1
+
 resource "azurerm_network_interface" "primary-spoke2-vm1-nic" {
   name                = "${var.primary-region}-spoke2-vm1-nic"
   location            = azurerm_resource_group.region1.location
@@ -297,9 +296,9 @@ resource "azurerm_linux_virtual_machine" "primary-spoke2-vm1" {
   }
 }
 
-##############################
-# Primary Spoke2 VM2
-##############################
+
+## Primary Spoke2 VM2
+
 resource "azurerm_network_interface" "primary-spoke2-vm2-nic" {
   name                = "${var.primary-region}-spoke2-vm2-nic"
   location            = azurerm_resource_group.region1.location

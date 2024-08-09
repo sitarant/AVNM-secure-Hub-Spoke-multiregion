@@ -1,5 +1,6 @@
 
-#hub peerings
+# Hub peerings
+
 resource "azurerm_virtual_network_peering" "hub2hub" {
   name                         = "hub2hub"
   resource_group_name          = azurerm_resource_group.region1.name

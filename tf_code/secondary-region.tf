@@ -1,4 +1,4 @@
-#create hub networks and subnets in secondary regipon
+# Create hub networks and subnets in secondary region
 
 resource "azurerm_virtual_network" "secondary-region" {
   name                = "secondary-region-vnet"
@@ -33,7 +33,7 @@ resource "azurerm_subnet" "secondary-region-hub-gateway" {
 }
 
 resource "azurerm_subnet" "secondary-region-hub-bastion" {
-  name                 = "AzureBasionSubnet"
+  name                 = "AzureBastionSubnet"
   virtual_network_name = azurerm_virtual_network.secondary-region.name
   resource_group_name  = azurerm_resource_group.region2.name
   address_prefixes     = ["10.0.3.0/24"]
@@ -41,7 +41,7 @@ resource "azurerm_subnet" "secondary-region-hub-bastion" {
 }
 
 
-#firewall deployments
+# Firewall deployment
 
 resource "azurerm_public_ip" "secondary-firewall-pip" {
   name                = "secondary-fw-pip"
@@ -67,7 +67,7 @@ resource "azurerm_firewall" "secondary-firewall" {
   }
 }
 
-#create spokes
+# Create Spokes
 
 resource "azurerm_virtual_network" "secondary-spokes-vnet" {
   count = 2
@@ -94,7 +94,7 @@ resource "azurerm_subnet" "spoke-secondary-subnet-vm2" {
   address_prefixes     = ["10.0.1${count.index}.128/25"]
 }
 
-#VPN Gateway deployment
+# VPN Gateway deployment
 
 resource "azurerm_public_ip" "secondary-vpn-gateway-pip" {
   name                = "secondary-vpn-gateway-pip"
@@ -126,11 +126,11 @@ resource "azurerm_virtual_network_gateway" "secondary-vpn-gateway" {
 
 
 
-#VM deployment
+# VM deployment
 
 
-# Secondary Hub VM
-##############################
+## Secondary Hub VM
+
 resource "azurerm_network_interface" "secondary-hub-vm-nic" {
   name                = "${var.secondary-region}-hub-vm-nic"
   location            = azurerm_resource_group.region2.location
@@ -169,9 +169,9 @@ resource "azurerm_linux_virtual_machine" "secondary-hub-vm" {
 }
 
 
-##############################
-# secondary Spoke1 VM1
-##############################
+
+## Secondary Spoke1 VM1
+
 resource "azurerm_network_interface" "secondary-spoke1-vm1-nic" {
   name                = "${var.secondary-region}-spoke1-vm1-nic"
   location            = azurerm_resource_group.region2.location
@@ -209,9 +209,9 @@ resource "azurerm_linux_virtual_machine" "secondary-spoke1-vm1" {
   }
 }
 
-##############################
-# secondary Spoke1 VM2
-##############################
+
+## Secondary Spoke1 VM2
+
 resource "azurerm_network_interface" "secondary-spoke1-vm2-nic" {
   name                = "${var.secondary-region}-spoke1-vm2-nic"
   location            = azurerm_resource_group.region2.location
@@ -254,9 +254,9 @@ resource "azurerm_linux_virtual_machine" "secondary-spoke1-vm2" {
 
 
 
-##############################
-# secondary Spoke2 VM1
-##############################
+
+## Secondary Spoke2 VM1
+
 resource "azurerm_network_interface" "secondary-spoke2-vm1-nic" {
   name                = "${var.secondary-region}-spoke2-vm1-nic"
   location            = azurerm_resource_group.region2.location
@@ -294,9 +294,9 @@ resource "azurerm_linux_virtual_machine" "secondary-spoke2-vm1" {
   }
 }
 
-##############################
-# secondary Spoke2 VM2
-##############################
+
+## Secondary Spoke2 VM2
+
 resource "azurerm_network_interface" "secondary-spoke2-vm2-nic" {
   name                = "${var.secondary-region}-spoke2-vm2-nic"
   location            = azurerm_resource_group.region2.location
